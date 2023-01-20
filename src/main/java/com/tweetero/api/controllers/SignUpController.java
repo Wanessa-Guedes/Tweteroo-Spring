@@ -1,7 +1,6 @@
 package com.tweetero.api.controllers;
 
-import java.util.HashMap;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,18 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tweetero.api.dto.UserDTO;
+import com.tweetero.api.model.User;
+import com.tweetero.api.service.SignUpService;
 
 @RestController
 @RequestMapping("/sign-up")
-public class SignUp {
+public class SignUpController {
 
-    private HashMap<String, String> userInfo = new HashMap<>();
+    @Autowired
+    SignUpService service;
 
     @PostMapping
-    public ResponseEntity<HashMap<String, String>> sign(@RequestBody UserDTO req) {
-        userInfo.put("username", req.username());
-        userInfo.put("avatar", req.avatar());
-        System.out.println(userInfo);
-        return ResponseEntity.ok().body(userInfo);
+    public ResponseEntity<UserDTO> sign(@RequestBody UserDTO req) {
+        User userData = service.signUp(req);
+        UserDTO userDataDto = new UserDTO(userData.getUsername(), userData.getAvatar());
+        return ResponseEntity.ok().body(userDataDto);
     }
 }
