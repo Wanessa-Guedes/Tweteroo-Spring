@@ -14,8 +14,6 @@ public class SignUpService {
     private SignUpRepository repository;
 
     public User signUp(UserDTO data) {
-        System.out.println("ENTREIIIIIIII");
-        System.out.println(new User(data));
         return repository.save(new User(data));
     }
 
