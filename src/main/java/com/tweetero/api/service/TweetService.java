@@ -40,4 +40,11 @@ public class TweetService {
         return filterTweetsDTO;
     }
 
+    public List<TweetDTO> GetTweetsByUserName(String data) {
+        List<Tweet> tweeters = tweetRepository.findByUsername(data);
+        List<TweetDTO> tweetersDTO = new ArrayList<>();
+        tweeters.forEach(obj -> tweetersDTO.add(new TweetDTO(obj.getUsername(), obj.getAvatar(), obj.getTweet())));
+        return tweetersDTO;
+    }
+
 }
