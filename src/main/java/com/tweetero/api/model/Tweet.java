@@ -13,6 +13,10 @@ import lombok.Data;
 @Entity
 public class Tweet {
 
+    public Tweet() {
+
+    }
+
     public Tweet(TweetDTO data) {
         this.username = data.username();
         this.tweet = data.tweet();
@@ -24,6 +28,9 @@ public class Tweet {
 
     @Column(length = 50, nullable = false)
     String username;
+
+    @Column(nullable = false)
+    private String avatar;
 
     @Column(nullable = false)
     String tweet;

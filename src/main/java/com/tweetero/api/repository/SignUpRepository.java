@@ -6,4 +6,6 @@ import com.tweetero.api.model.User;
 
 public interface SignUpRepository extends JpaRepository<User, Long> {
 
+    User findByUsername(String username);
+
 }

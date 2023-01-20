@@ -19,7 +19,7 @@ public class SignUpController {
     SignUpService service;
 
     @PostMapping
-    public ResponseEntity<Object> sign(@RequestBody UserDTO req) {
+    public ResponseEntity<Object> Sign(@RequestBody UserDTO req) {
         service.signUp(req);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
