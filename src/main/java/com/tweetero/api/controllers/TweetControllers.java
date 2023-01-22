@@ -18,6 +18,8 @@ import com.tweetero.api.dto.TweetDTO;
 import com.tweetero.api.middlewares.ErrorAbstract;
 import com.tweetero.api.service.TweetService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/tweets")
 @CrossOrigin(origins = "*")
@@ -27,7 +29,10 @@ public class TweetControllers extends ErrorAbstract {
     TweetService service;
 
     @PostMapping
-    public ResponseEntity<Object> PostTweet(@RequestBody TweetDTO req) {
+    public ResponseEntity<Object> PostTweet(@Valid @RequestBody TweetDTO req) throws Exception {
+        if (req.username() == null || req.tweet() == null) {
+            throw new Exception("Confira os dados! Estão faltando");
+        }
         service.PostTweetService(req);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
